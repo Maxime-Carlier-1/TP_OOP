@@ -1,0 +1,23 @@
+2- 
+À quoi sert cette fonction ?
+Elle prend une liste de relevés, et si un relevé correspond à un capteur donné, elle remplace sa valeur par une nouvelle valeur.
+
+Petite remarque
+Le nom liste est correct techniquement, mais Pylint préfère des noms plus explicite
+
+3-
+def test_recalibrer():
+    releve1 = ("laser_avant", 2.35, "m")
+    releve2 = ("laser_arriere", 1.10, "m")
+    releve3 = ("gyroscope", 87.5, "deg")
+    releves = [releve1, releve2, releve3]
+
+    nouveaux_releves = recalibrer(releves, "laser_avant", 2.40)
+
+    assert nouveaux_releves == [
+        ("laser_avant", 2.40, "m"),
+        ("laser_arriere", 1.10, "m"),
+        ("gyroscope", 87.5, "deg"),
+    ]
+
+4-
