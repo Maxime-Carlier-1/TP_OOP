@@ -1,5 +1,8 @@
 """Exercices 1 -- Habitant"""
 
+#l'utilisation d'une methode abstraite assure que chaque sous class aura une definition pour cette methode
+#cela evite de se ramene a une methode vide ou non defini si on avait simplement utilise pass
+
 from abc import ABC, abstractmethod
 
 class Habitant(ABC):
@@ -106,3 +109,4 @@ except ValueError:
 
 affichage(adulte)
 affichage(enfant)
+
