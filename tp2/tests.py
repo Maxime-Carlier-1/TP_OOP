@@ -54,5 +54,20 @@ class TestVillage(unittest.TestCase):
         self.assertIn(h, village1.habitants)
         self.assertIn(h, village2.habitants)
 
+class TestHeritage(unittest.TestCase):
+    """Tests pour la classe Habitant et l’encapsulation."""
+
+    def test_retraite_valide(self):
+        habitant = Adulte("Alice", 30, "Rue C", None)
+        self.assertEqual(habitant.calcul_nombre_annee_avant_retraite(), 64-30)
+
+    def test_retraite_valide(self):
+        habitant = Enfant("Lucie", 8, "Rue D", None)
+        self.assertEqual(habitant.calcul_nombre_annee_avant_retraite(), "Erreur: un enfant ne peut pas calculer sa retraite")
+
+    def test_enfant_invalide(self):
+        with self.assertRaises(ValueError):
+            habitant = Enfant("Lucie", 20, "Rue D", None)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
