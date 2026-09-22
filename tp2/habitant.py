@@ -57,12 +57,41 @@ class Habitant(ABC):
     @abstractmethod
     def calcul_nombre_annee_avant_retraite(self):
         '''Calcul le nombre d'annee avant la retraite'''
+        pass
+
+class Adulte(Habitant):
+    """Class Adulte"""
+    def __init__(self,nom,age,adresse,animaux=None):
+        if age >= 18:
+            super().__init__(nom,age,adresse,animaux)
+        else:
+            raise ValueError("Un adulte doit avoir au moins 18 ans")
+    def calcul_nombre_annee_avant_retraite(self):
+        '''Calcul le nombre d'annee avant la retraite d'un adulte'''
         if self.age >= 62:
-            return 0
+            return "deja a la retraite"
         return 62 - self.age
+    
+class Enfant(Habitant):
+    """Class Enfant"""
+    def __init__(self,nom,age,adresse,animaux=None):
+        if age < 18:
+            super().__init__(nom,age,adresse,animaux)
+        else:
+            raise ValueError("Un enfant doit avoir moins de 18 ans")
+    def calcul_nombre_annee_avant_retraite(self):
+        """nombre d'annee avant la retraite d'un enfant"""
+        return "Erreur: un enfant ne peut pas calculer sa retraite"
+
+adulte = Adulte("Marie", 35, "Rue A")
+enfant = Enfant("Lucas", 12, "Rue B")
+
+assert isinstance(adulte, Habitant)
+assert adulte.calcul_nombre_annee_avant_retraite() == 27
+assert "enfant" in enfant.calcul_nombre_annee_avant_retraite()
 
 try:
-    h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
-except TypeError:
-    print("instanciation impossible")
-
+    Enfant("Oups", 25, "Rue C")
+    assert False, "une ValueError aurait du etre levee"
+except ValueError:
+    pass
