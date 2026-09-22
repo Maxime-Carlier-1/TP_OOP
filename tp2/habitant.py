@@ -11,6 +11,9 @@ class Habitant(ABC):
         self.__adresse = adresse
         self.__animaux = animaux if animaux is not None else {}
 
+    def __str__(self):
+        return self.__nom + ", " + str(self.age) + " ans, habite a " + self.__adresse
+
     def get_nom(self):
         '''Return le nom de l'habitant'''
         return self.__nom
@@ -95,3 +98,5 @@ try:
     assert False, "une ValueError aurait du etre levee"
 except ValueError:
     pass
+
+print("adultes = ", adulte)
