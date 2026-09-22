@@ -13,7 +13,8 @@ class Habitant():
         '''Return le nom de l'habitant'''
         return self.__nom
 
-    def get_age(self):
+    @property
+    def age(self):
         '''Return l'âge de l'habitant'''
         return self.__age
 
@@ -29,8 +30,11 @@ class Habitant():
         '''Set le nom de l'habitant'''
         self.__nom = nom
 
-    def set_age(self, age):
+    @age.setter
+    def age(self, age):
         '''Set l'age de l'habitant'''
+        if age < 0 or age>130:
+            raise ValueError("Age invalide (<130 ou >0)")
         self.__age = age
 
     def set_adresse(self, adresse):
@@ -48,3 +52,12 @@ class Habitant():
     def compte_animal(self, animal):
         '''Return le compte des animaux (0 si l'animal n'existe pas)'''
         return self.__animaux.get(animal, 0)
+
+h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
+h1.age = 26
+assert h1.age == 26
+try:
+    h1.age = -5
+    assert False, "une ValueError aurait du etre levee"
+except ValueError:
+    pass
