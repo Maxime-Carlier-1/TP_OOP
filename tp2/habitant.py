@@ -1,5 +1,7 @@
 """Exercices 1 -- Habitant"""
 
+from multipledispatch import dispatch
+
 class Habitant():
     '''Classe habitant'''
 
@@ -53,6 +55,17 @@ class Habitant():
         '''Return le compte des animaux (0 si l'animal n'existe pas)'''
         return self.__animaux.get(animal, 0)
 
+@dispatch(object, str)
+def set_info(habitant, nom):
+    '''Set le nom de l'habitant'''
+    habitant.set_nom(nom) 
+
+@dispatch(object, str, int)
+def set_info(habitant, nom, age):
+    '''Set le nom et l'âge de l'habitant'''
+    habitant.set_nom(nom)
+    habitant.age = age
+
 h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
 h1.age = 26
 assert h1.age == 26
@@ -61,3 +74,7 @@ try:
     assert False, "une ValueError aurait du etre levee"
 except ValueError:
     pass
+
+h2 = Habitant("Bob", 40, "Rue C")
+set_info(h2, "Robert") # met a jour le nom seulement
+set_info(h2, "Robert", 41) # met a jour le nom et l’age
