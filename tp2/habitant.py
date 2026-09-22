@@ -86,6 +86,11 @@ class Enfant(Habitant):
         """nombre d'annee avant la retraite d'un enfant"""
         return "Erreur: un enfant ne peut pas calculer sa retraite"
 
+def affichage(h: Habitant):
+    """Affiche les informations d'un habitant"""
+    print(h)
+
+
 adulte = Adulte("Marie", 35, "Rue A")
 enfant = Enfant("Lucas", 12, "Rue B")
 
@@ -99,4 +104,5 @@ try:
 except ValueError:
     pass
 
-print("adultes = ", adulte)
+affichage(adulte)
+affichage(enfant)
