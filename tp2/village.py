@@ -2,6 +2,11 @@
 
 from habitant import Habitant
 
+#- Ici ajout_habitant_composition est crée un habitant à l'intérieur de la classe Village,
+#liant ainsi leur existance (composition)
+#- A l'inverse, ajouter_habitant_agregation utilise un habitant indépendant au village,
+#et pouvant donc être utilise dans d'autre village (agregation)
+
 class Village():
     '''Classe village'''
 
