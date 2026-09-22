@@ -57,9 +57,9 @@ class Habitant(ABC):
     @abstractmethod
     def calcul_nombre_annee_avant_retraite(self):
         '''Calcul le nombre d'annee avant la retraite'''
-        if self.age >= 64:
+        if self.age >= 62:
             return 0
-        return 64 - self.age
+        return 62 - self.age
 
 try:
     h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
