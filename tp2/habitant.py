@@ -1,9 +1,9 @@
 """Exercices 1 -- Habitant"""
 
-from multipledispatch import dispatch
+from abc import ABC, abstractmethod
 
-class Habitant():
-    '''Classe habitant'''
+class Habitant(ABC):
+    '''Classe abstraite habitant'''
 
     def __init__(self, nom, age, adresse, animaux=None):
         self.__nom = nom
@@ -54,27 +54,15 @@ class Habitant():
     def compte_animal(self, animal):
         '''Return le compte des animaux (0 si l'animal n'existe pas)'''
         return self.__animaux.get(animal, 0)
+    @abstractmethod
+    def calcul_nombre_annee_avant_retraite(self):
+        '''Calcul le nombre d'annee avant la retraite'''
+        if self.age >= 64:
+            return 0
+        return 64 - self.age
 
-@dispatch(object, str)
-def set_info(habitant, nom):
-    '''Set le nom de l'habitant'''
-    habitant.set_nom(nom) 
-
-@dispatch(object, str, int)
-def set_info(habitant, nom, age):
-    '''Set le nom et l'âge de l'habitant'''
-    habitant.set_nom(nom)
-    habitant.age = age
-
-h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
-h1.age = 26
-assert h1.age == 26
 try:
-    h1.age = -5
-    assert False, "une ValueError aurait du etre levee"
-except ValueError:
-    pass
+    h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
+except TypeError:
+    print("instanciation impossible")
 
-h2 = Habitant("Bob", 40, "Rue C")
-set_info(h2, "Robert") # met a jour le nom seulement
-set_info(h2, "Robert", 41) # met a jour le nom et l’age
