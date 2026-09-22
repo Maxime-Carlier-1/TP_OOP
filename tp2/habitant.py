@@ -4,22 +4,47 @@ class Habitant():
     '''Classe habitant'''
 
     def __init__(self, nom, age, adresse, animaux=None):
-        self.nom = nom
-        self.age = age
-        self.adresse = adresse
-        self.animaux = animaux if animaux is not None else {}
+        self.__nom = nom
+        self.__age = age
+        self.__adresse = adresse
+        self.__animaux = animaux if animaux is not None else {}
+
+    def get_nom(self):
+        '''Return le nom de l'habitant'''
+        return self.__nom
+
+    def get_age(self):
+        '''Return l'âge de l'habitant'''
+        return self.__age
+
+    def get_adresse(self):
+        '''Return l'adresse de l'habitant'''
+        return self.__adresse
+
+    def get_animaux(self):
+        '''Return les animaux de l'habitant'''
+        return self.__animaux
+
+    def set_nom(self, nom):
+        '''Set le nom de l'habitant'''
+        self.__nom = nom
+
+    def set_age(self, age):
+        '''Set l'age de l'habitant'''
+        self.__age = age
+
+    def set_adresse(self, adresse):
+        '''Set l'adresse de l'habitant'''
+        self.__adresse = adresse
+
+    def set_animaux(self, animaux):
+        '''Set les animaux de l'habitant'''
+        self.__animaux = animaux
 
     def affichage_adresse(self):
-        '''Affche l'adresse de l'habitant'''
-        print(f"{self.nom} habite a {self.adresse}")
+        '''Affiche l'adresse de l'habitant'''
+        print(f"{self.__nom} habite a {self.__adresse}")
 
     def compte_animal(self, animal):
         '''Return le compte des animaux (0 si l'animal n'existe pas)'''
-        return self.animaux.get(animal, 0)
-
-
-h1 = Habitant("Aldric", 25, "Rue A", {"vaches": 3})
-assert h1.nom == "Aldric"
-assert h1.compte_animal("vaches") == 3
-assert h1.compte_animal("moutons") == 0
-h1.affichage_adresse() # affiche "Aldric habite a Rue A"
+        return self.__animaux.get(animal, 0)
